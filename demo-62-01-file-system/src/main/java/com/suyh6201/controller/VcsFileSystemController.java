@@ -4,6 +4,7 @@ import com.suyh6201.component.VcsFileSystemComponent;
 import com.suyh6201.dto.FileStoreLocationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ public class VcsFileSystemController {
 
     private final VcsFileSystemComponent vcsFileSystemComponent;
 
-    @RequestMapping(value = "/file/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/file/upload", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public List<FileStoreLocationDto> httpUploadFile(
             @RequestParam("files") MultipartFile[] files) {
         return vcsFileSystemComponent.filesUpload(files);
