@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.io.File;
 
 /**
  * @author suyh
@@ -25,9 +26,11 @@ public class VcsProperties {
     @Validated
     public static class FileStoreConfig {
         /**
-         * 如果存在系统磁盘，则指定系统磁盘的存储位置
+         * 上传文件存储在磁盘的位置
+         * windows 系统在指定盘符
+         *
          */
-        @NotEmpty(groups = SystemDiskGroup.class)
+        @NotEmpty
         private String systemDiskRootLocation;
 
         /**
@@ -39,15 +42,16 @@ public class VcsProperties {
             }
 
             systemDiskRootLocation = systemDiskRootLocation.trim();
-            if (systemDiskRootLocation.equals("/")) {
+
+            // 文件路径分隔符：/ 或者 \
+            String separatorStr = File.separatorChar + "";
+            if (systemDiskRootLocation.equals(separatorStr)) {
                 this.systemDiskRootLocation = systemDiskRootLocation;
-            } else if (systemDiskRootLocation.endsWith("/")) {
+            } else if (systemDiskRootLocation.endsWith(separatorStr)) {
                 this.systemDiskRootLocation = systemDiskRootLocation;
             } else {
-                this.systemDiskRootLocation = systemDiskRootLocation + "/";
+                this.systemDiskRootLocation = systemDiskRootLocation + separatorStr;
             }
         }
-
-        public interface SystemDiskGroup { }
     }
 }

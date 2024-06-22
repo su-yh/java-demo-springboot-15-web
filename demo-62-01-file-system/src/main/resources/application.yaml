@@ -1,0 +1,11 @@
+spring:
+  servlet:
+    multipart:
+      # 文件上传大小限制
+      max-file-size: 50MB
+      max-request-size: 50MB
+suyh:
+  fs:
+    file-store-config:
+      system-disk-root-location: "E:\\demo-62-01-file-system\\"
+

@@ -51,7 +51,7 @@ public class VcsFileSystemComponent {
 
             assert originalFilename != null;
             int index = originalFilename.lastIndexOf(".");
-            String fileSuffix = "";
+            String fileSuffix = ""; // 文件扩展名
             if (index > 0) {
                 fileSuffix = originalFilename.substring(index);
             }
