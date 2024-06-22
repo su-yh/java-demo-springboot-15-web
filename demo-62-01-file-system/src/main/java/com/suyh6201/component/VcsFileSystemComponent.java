@@ -13,6 +13,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class VcsFileSystemComponent {
 
     private String buildUserDiskDir(long userId) {
         String rootDir = vcsProperties.getFileStoreConfig().getSystemDiskRootLocation();
-        return rootDir + userId + "/";
+        return rootDir + userId + File.separatorChar;
     }
 
     private List<FileStoreLocationDto> storeSystemDiskFiles(MultipartFile[] files) {
@@ -68,31 +70,30 @@ public class VcsFileSystemComponent {
                 throw new RuntimeException(filePath);
             }
 
-            // TODO: suyh - 生成controller 对应的url 路径
-            String resultUrl = "/vcs/fs" + "/file/download/disk" + "/" + fileFullName;
+            try {
+                String encodeFilePath = URLEncoder.encode(filePath, StandardCharsets.UTF_8.name());
 
-            FileStoreLocationDto fileStoreLocationDto = new FileStoreLocationDto();
-            fileStoreLocationDto.setUrl(resultUrl);
-            resultList.add(fileStoreLocationDto);
+                FileStoreLocationDto fileStoreLocationDto = new FileStoreLocationDto();
+                fileStoreLocationDto.setUrlEncodePath(encodeFilePath);
+                resultList.add(fileStoreLocationDto);
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return resultList;
     }
 
-    public void downloadSystemDiskFile(String fileName, HttpServletResponse response) {
-        long userId = 111L;
-        String fileDirPrefix = buildUserDiskDir(userId);
-
-        String filePath = fileDirPrefix + fileName;
+    public void downloadSystemDiskFile(String filePath, HttpServletResponse response) {
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException(fileName);
+            throw new RuntimeException(filePath);
         }
         response.reset();
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
 
         try (BufferedInputStream bis = new BufferedInputStream(Files.newInputStream(file.toPath()));) {
             byte[] buff = new byte[1024];
@@ -104,7 +105,7 @@ public class VcsFileSystemComponent {
             }
         } catch (IOException exception) {
             log.error("write file failed, file path: {}", filePath, exception);
-            throw new RuntimeException(fileName);
+            throw new RuntimeException(filePath);
         }
     }
 }

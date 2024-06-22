@@ -28,6 +28,7 @@ public class VcsProperties {
         /**
          * 上传文件存储在磁盘的位置
          * windows 系统在指定盘符
+         * 而且需要是绝对路径，相对路径jdk 会去找到临时目录，而子目录并没有创建所以一般都会报错。
          *
          */
         @NotEmpty

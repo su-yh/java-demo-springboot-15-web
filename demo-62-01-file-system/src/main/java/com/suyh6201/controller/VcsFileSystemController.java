@@ -5,7 +5,6 @@ import com.suyh6201.dto.FileStoreLocationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +36,10 @@ public class VcsFileSystemController {
     }
 
     // 存储到系统磁盘文件下载
-    @RequestMapping(value = "/file/download/disk/{fileName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/file/download/disk", method = RequestMethod.GET)
     public void diskFileDownload(
             HttpServletResponse response,
-            @PathVariable("fileName") String fileName) {
-        vcsFileSystemComponent.downloadSystemDiskFile(fileName, response);
+            @RequestParam("filePath") String filePath) {
+        vcsFileSystemComponent.downloadSystemDiskFile(filePath, response);
     }
 }

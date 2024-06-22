@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class FileStoreLocationDto {
-    // 文件保存位置，对于本地存储的文件生成的url，不包含协议域名以及上下文根路径，需要前端自行拼接成完整url。
-    private String url;
+    // 文件保存的绝对路径，如果是windows 则会有盘符。
+    // 通过url 编码后的字符串路径
+    private String urlEncodePath;
 }
