@@ -16,7 +16,12 @@
     </properties>
 
     <modules>
+        <module>demo-22-validation-03</module>
+        <module>demo-56-01-HandlerMethodArgumentResolver</module>
+        <module>demo-58-01-suyh-web-common-spring-boot-starter</module>
+        <module>demo-58-02-web-common</module>
         <module>demo-62-01-file-system</module>
+        <module>demo-58-03-web-common</module>
     </modules>
 
 

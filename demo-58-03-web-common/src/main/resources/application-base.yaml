@@ -1,0 +1,16 @@
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh
+data:
+  query:
+    base:
+      users:
+        - username: "suyh"
+          password: "suyh"
+        - username: "tmp"
+          password: "tmp"
+

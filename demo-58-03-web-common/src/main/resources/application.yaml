@@ -1,0 +1,16 @@
+spring:
+  config:
+    import:
+      - application-base.yaml
+      - application-datasource.yaml
+      - application-jackson.yaml
+      - application-log.yaml
+      - application-messageSource.yaml
+      - application-swagger.yaml
+      - application-web.yaml
+
+
+
+
+
+

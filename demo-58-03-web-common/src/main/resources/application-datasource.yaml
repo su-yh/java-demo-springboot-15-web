@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    dynamic:
+      enabled: true
+      primary: "cds-mysql"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh, sit
+
+  datasource:
+    hikari:
+      cds-mysql:
+        jdbc-url: jdbc:mysql://192.168.8.43:3306/suyh_mock_cds?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: suyh_mock_cds
+        password: suyh_mock_cds
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+
+
+
+
+
+
+
