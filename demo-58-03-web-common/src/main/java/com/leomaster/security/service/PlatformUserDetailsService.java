@@ -99,8 +99,8 @@ public class PlatformUserDetailsService implements UserDetailsService, LogoutSuc
 
     public static String createToken(Map<String, Object> claims, String username) {
         return Jwts.builder()
-                .setSubject(username)
                 .setClaims(claims)
+                .setSubject(username)  // 这里的顺序是有关系的，必须先有claims 才会有subject，因为它是设置在claims 里面的
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
