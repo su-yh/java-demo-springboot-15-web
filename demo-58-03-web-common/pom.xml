@@ -15,6 +15,7 @@
 
         <spring-boot.version>2.7.15</spring-boot.version>
 
+
         <mybatisplus.version>3.5.5</mybatisplus.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
         <knife4j.version>4.3.0</knife4j.version>
