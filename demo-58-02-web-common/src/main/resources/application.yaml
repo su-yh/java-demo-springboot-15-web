@@ -3,7 +3,7 @@ spring:
     import:
       - application-jackson.yaml
       - application-log.yaml
-      - application-messageSource.yaml
+      - application-message_source.yaml
       - application-swagger.yaml
       - application-web.yaml
   profiles:

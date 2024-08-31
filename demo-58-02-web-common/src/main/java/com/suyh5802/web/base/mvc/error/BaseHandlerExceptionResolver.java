@@ -48,13 +48,16 @@ public class BaseHandlerExceptionResolver extends DefaultHandlerExceptionResolve
         return null;
     }
 
+    /**
+     * 这里处理完了之后，我们需要调用 response.sendError(..) 让其继续往下走，走到 {@link BaseErrorAttributes} 中做后续的处理。
+     * 不要使用response.getWriter().println(..) 直接将结果写出来，这样就不会走到我们后续补充的错误信息里面了。
+     */
     protected ModelAndView handleOverseasProxyException(
             @NonNull BaseException ex, @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response, @Nullable Object handler) throws IOException {
         // 处理自定义的异常类，这里将业务异常认为是200 的OK，对于error 的返回值属性将在ErrorAttributes 中处理
         // OverseasProxyException 因为是自定义的异常类，这个异常表示的是请求是正常的，只是业务失败，所以要将状态处理成200。然后报业务错误即可。
         int errorCode = ExceptionCategory.SYSTEM.equals(ex.getCategory()) ? HttpServletResponse.SC_INTERNAL_SERVER_ERROR : HttpServletResponse.SC_OK;
-
         response.sendError(errorCode, ex.getMessage());
         return new ModelAndView();
     }

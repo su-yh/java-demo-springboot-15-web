@@ -1,0 +1,10 @@
+spring:
+  messages:
+    # 要使用MessageSource 我们应该要提供 一个对应 的配置文件 。
+    basename: i18n/messages
+    # 当找不到对应语言的配置文件时，是否回退为本地环境的语言环境
+    # 这里配置为false: 就是忽略本地语言环境，而使用 messages.properties 文件中的配置值。
+    fallback-to-system-locale: false
+
+
+
