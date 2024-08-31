@@ -26,6 +26,10 @@ public class BaseResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return false;
         }
 
+        if (ResponseResult.class.isAssignableFrom(returnType.getParameterType())) {
+            return false;
+        }
+
         WrapperResponseAdvice wrapperResponseAdvice = returnType.getMethodAnnotation(WrapperResponseAdvice.class);
         if (wrapperResponseAdvice == null) {
             return false;
@@ -47,21 +51,7 @@ public class BaseResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             @NonNull ServerHttpRequest request,
             @NonNull ServerHttpResponse response) {
 
-        // 遇到feign接口之类的请求, 不应该再次包装,应该直接返回
-        // 上述问题的解决方案: 可以在feign拦截器中,给feign请求头中添加一个标识字段, 表示是feign请求
-        // 在此处拦截到feign标识字段, 则直接放行 返回body.
-
-        if (body == null) {
-            return ResponseResult.ofSuccess();
-        }
-
-        if (body instanceof ResponseResult) {
-            return body;
-        }
-
-        // 这里需要对String 类型的做特别处理，因为它由StringHttpMessageConverter 类处理，
-        // 如果返回的是SuyhResult 会发生类型转换异常。
-        if (String.class.isAssignableFrom(body.getClass())) {
+        if (String.class.isAssignableFrom(returnType.getParameterType())) {
             ResponseResult<Object> result = ResponseResult.ofSuccess(body);
             return JsonUtils.serializable(result);
         }
