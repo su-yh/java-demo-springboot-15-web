@@ -1,5 +1,6 @@
 package com.leomaster.controller;
 
+import com.leomaster.mvc.response.annotation.WrapperResponseAdvice;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -33,11 +34,13 @@ public class SuyhTestController {
 //    }
 
     @RequestMapping(value = "/response/string", method = RequestMethod.GET)
+    @WrapperResponseAdvice
     public String testResponseString() {
         return "OK";
     }
 
     @RequestMapping(value = "/response/void", method = RequestMethod.GET)
+    @WrapperResponseAdvice
     public void testResponseVoid() {
     }
 }

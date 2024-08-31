@@ -1,10 +1,11 @@
 package com.leomaster.mvc.response;
 
-import com.leomaster.mvc.response.annotation.DisableControllerResponseAdvice;
+import com.leomaster.mvc.response.annotation.WrapperResponseAdvice;
 import com.leomaster.mvc.vo.ResponseResult;
 import com.leomaster.util.JsonUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -21,11 +22,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 public class BaseResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(@NonNull MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
-        // 使用注解明确禁止统一封装的，这里也不处理。
-        if (returnType.hasMethodAnnotation(DisableControllerResponseAdvice.class)) {
+        if (ResponseEntity.class.isAssignableFrom(returnType.getParameterType())) {
             return false;
         }
-//        return !ResponseEntity.class.isAssignableFrom(returnType.getParameterType());
+
+        WrapperResponseAdvice wrapperResponseAdvice = returnType.getMethodAnnotation(WrapperResponseAdvice.class);
+        if (wrapperResponseAdvice == null) {
+            return false;
+        }
+
+        if (!wrapperResponseAdvice.enabled()) {
+            return false;
+        }
+
         return true;
     }
 
