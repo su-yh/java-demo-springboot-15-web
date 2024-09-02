@@ -40,7 +40,7 @@ public class LoginAfterController {
      */
     @RequestMapping(value = "/successful", method = {RequestMethod.GET})
     @Deprecated
-    public Object loginSuccessful(Authentication authentication) {
+    public ResponseResult<String> loginSuccessful(Authentication authentication) {
         // 走到这里就表示用户名密码验证通过了，接下来就可以做后续处理了。
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
@@ -49,7 +49,8 @@ public class LoginAfterController {
         Map<String, Object> map = new HashMap<>();
         map.put("username", user.getUsername());
 
-        return TokenUtils.createToken(map, 1L, user.getUsername(), 1800);
+        String token = TokenUtils.createToken(map, 1L, user.getUsername(), 1800);
+        return ResponseResult.ofSuccess(token);
     }
 
     // suyh - 这里的问题主要是没有Authentication，有空的时候看下 SavedRequestAwareAuthenticationSuccessHandler  是怎么把这些参数补充上的
@@ -83,7 +84,7 @@ public class LoginAfterController {
     // suyh - 这里的问题主要是没有Authentication，有空的时候看下 SavedRequestAwareAuthenticationSuccessHandler  是怎么把这些参数补充上的
     // 不过这里保留了登录时的原始参数。
     @RequestMapping(value = "/successful/sms/code", method = RequestMethod.POST)
-    public Object loginSuccessfulBySmsCode(String mobile, String smsCode) {
+    public ResponseResult<String> loginSuccessfulBySmsCode(String mobile, String smsCode) {
         // 走到这里就表示用户名密码验证通过了，接下来就可以做后续处理了。
         // 这里就可以处理验证码什么的。
         System.out.println("mobile: " + mobile);
@@ -91,15 +92,17 @@ public class LoginAfterController {
 
         Map<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
-        return TokenUtils.createToken(map, 1L, mobile, 1800);
+        String token = TokenUtils.createToken(map, 1L, mobile, 1800);
+        return ResponseResult.ofSuccess(token);
     }
 
     @RequestMapping(value = "/failure/sms/code", method = RequestMethod.POST)
-    public Object loginFailureBySmsCode(@RequestAttribute("msg") String msg) {
+    public ResponseResult<String> loginFailureBySmsCode(@RequestAttribute("msg") String msg) {
         // suyh - 在这里抛出业务异常。
         if (true) {
             throw new RuntimeException(msg);
         }
-        return msg;
+
+        return ResponseResult.ofSuccess();
     }
 }

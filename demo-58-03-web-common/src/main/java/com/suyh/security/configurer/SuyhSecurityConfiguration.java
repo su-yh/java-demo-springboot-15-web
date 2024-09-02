@@ -75,10 +75,15 @@ public class SuyhSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     // 当登录成功之后的自定义处理器，默认实现是：SavedRequestAwareAuthenticationSuccessHandler
                     .successHandler(usernamePasswordForwardHandler)
                     .failureHandler(usernamePasswordForwardHandler);
+
+            http.logout().logoutUrl("/logout").logoutSuccessHandler(suyhLogoutService);
         } else {
             // 禁用spring-security 的表单登录，而是使用自定义的登录api，见 UserController
             // 详见：FormLoginConfigurer
             http.formLogin().disable();
+
+            // 登出也禁用掉，跟登录一样使用自定义的logout api 就可以了。
+            http.logout().disable();
         }
 
 //        // 基于短信的登录校验处理器
@@ -115,7 +120,5 @@ public class SuyhSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable();   // 关闭csrf 防护
 
         http.addFilterBefore(new JwtAuthenticationTokenFilter(userTokenService), UsernamePasswordAuthenticationFilter.class);
-
-        http.logout().logoutUrl("/logout").logoutSuccessHandler(suyhLogoutService);
     }
 }
