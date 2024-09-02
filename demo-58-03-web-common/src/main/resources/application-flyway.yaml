@@ -9,4 +9,8 @@ community:
       enabled: true
       locations:
         - "sqls/mysql"
+    flyway-cds-pgsql:
+      enabled: true
+      locations:
+        - "sqls/pgsql"
 

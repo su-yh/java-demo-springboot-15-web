@@ -6,7 +6,7 @@ spring:
 server:
   servlet:
     context-path: /prod-api
-  port: 8916
+  port: 9901
 
 #  error:
 #    # spring mvc 的默认异常处理，可以添加或者禁用一些返回值属性。

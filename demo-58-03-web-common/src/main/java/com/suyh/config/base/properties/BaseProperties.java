@@ -28,6 +28,10 @@ public class BaseProperties {
     @Valid
     private CommunityFlywayProperties flywayCdsMysql = new CommunityFlywayProperties();
 
+    @NestedConfigurationProperty
+    @Valid
+    private CommunityFlywayProperties flywayCdsPgsql = new CommunityFlywayProperties();
+
     /**
      * 国际化配置，语言以及国家，这个主要是跟前端需要保持一致，如果默认情况下没有使用国际惯例，那还可以自己定义一套。
      */

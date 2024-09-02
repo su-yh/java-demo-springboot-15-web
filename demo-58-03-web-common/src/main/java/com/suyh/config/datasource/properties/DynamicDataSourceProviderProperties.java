@@ -26,11 +26,16 @@ public class DynamicDataSourceProviderProperties implements DynamicDataSourcePro
     @NestedConfigurationProperty
     private HikariDataSource cdsMysql;
 
+    @NotNull
+    @NestedConfigurationProperty
+    private HikariDataSource cdsPgsql;
+
     private Map<String, DataSource> mapDatasource = new HashMap<>();
 
     @PostConstruct
     public void init() {
         mapDatasource.put(DataSourceNames.CDS_MYSQL, cdsMysql);
+        mapDatasource.put(DataSourceNames.CDS_PGSQL, cdsPgsql);
     }
 
     @Override
