@@ -1,16 +1,31 @@
 package com.leomaster.mvc.configurer;
 
 import com.leomaster.mvc.error.BaseHandlerExceptionResolver;
+import com.leomaster.mvc.login.CurrUserArgumentResolver;
+import com.leomaster.mvc.login.interceptor.LoginUserInterceptor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class BaseWebMvcConfigurer implements WebMvcConfigurer {
+    // i18n 国际化
+    private final MessageSource messageSource;
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new CurrUserArgumentResolver());
+    }
+
     @Override
     public void extendHandlerExceptionResolvers(@NonNull List<HandlerExceptionResolver> resolvers) {
         // 将spring mvc 创建的DefaultHandlerExceptionResolver 删除掉，使用自定义的DefaultHandlerExceptionResolver 派生类替代
@@ -26,5 +41,11 @@ public class BaseWebMvcConfigurer implements WebMvcConfigurer {
         }
 
         resolvers.add(new BaseHandlerExceptionResolver());
+    }
+
+    @Override
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
+        LoginUserInterceptor loginInterceptor = new LoginUserInterceptor();
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**");
     }
 }

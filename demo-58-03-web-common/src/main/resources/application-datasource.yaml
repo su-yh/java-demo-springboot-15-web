@@ -2,6 +2,7 @@ spring:
   datasource:
     dynamic:
       enabled: true
+      strict: true
       primary: "cds-mysql"
 
 ---
@@ -13,9 +14,9 @@ spring:
   datasource:
     hikari:
       cds-mysql:
-        jdbc-url: jdbc:mysql://192.168.8.43:3306/suyh_mock_cds?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: suyh_mock_cds
-        password: suyh_mock_cds
+        jdbc-url: jdbc:mysql://192.168.8.43:3306/community_eb_mgr?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: community_eb_mgr
+        password: community_eb_mgr
         driver-class-name: com.mysql.cj.jdbc.Driver
 
 ---

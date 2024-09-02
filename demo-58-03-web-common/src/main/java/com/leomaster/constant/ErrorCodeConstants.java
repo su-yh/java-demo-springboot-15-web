@@ -4,10 +4,17 @@ package com.leomaster.constant;
  * @author suyh
  * @since 2023-11-26
  */
-public interface ErrorCodeConstants {
-    ErrorCode PARAMETER_ERROR = new ErrorCode(1015001, "参数错误");
-    // 带参数的错误
-    ErrorCode PARAMETER_ERROR_PARAM = new ErrorCode(1015002, "参数错误: {0}");
+public final class ErrorCodeConstants {
+    public static final int SERVICE_ERROR = 1015000;
+    public static final int PARAMETER_ERROR = 1015001;
+    public static final int PARAMETER_ERROR_PARAM = 1015002;
+    public static final int USER_NOT_EXISTS = 1015003;
+    public static final int USER_PASSWORD_NOT_MATCH = 1015004;
+    public static final int USER_NOT_LOGIN = 1015005;
+    public static final int TOKEN_ERROR_OR_EXPIRE = 1015006;
+    public static final int USER_EXISTS = 1015007;
+    public static final int USER_BAD_CREDENTIALS = 1015008;
 
-    ErrorCode USER_NOT_EXISTS = new ErrorCode(1015003, "用户(id: {0})不存在");
+
+
 }

@@ -6,9 +6,11 @@ import com.zaxxer.hikari.HikariDataSource;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,9 @@ import java.util.Map;
  */
 @ConfigurationProperties(prefix = "spring.datasource.hikari")
 @Data
+@Validated
 public class DynamicDataSourceProviderProperties implements DynamicDataSourceProvider {
+    @NotNull
     @NestedConfigurationProperty
     private HikariDataSource cdsMysql;
 

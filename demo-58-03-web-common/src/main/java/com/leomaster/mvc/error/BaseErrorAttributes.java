@@ -1,19 +1,21 @@
 package com.leomaster.mvc.error;
 
-import com.leomaster.constant.ErrorCode;
-import com.leomaster.mvc.exception.ExceptionCategory;
+import com.leomaster.constant.ErrorCodeConstants;
 import com.leomaster.mvc.exception.BaseException;
+import com.leomaster.mvc.exception.ExceptionCategory;
+import com.leomaster.util.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -34,17 +36,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class BaseErrorAttributes extends DefaultErrorAttributes {
-    private static final String ERROR_CODE_PREFIX = "suyh.error-code.";
-
     // i18n 国际化
     private final MessageSource messageSource;
 
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        final String timestampFormat = sdf.format(new Date());
+
+        LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        String timestampFormat = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
 
         Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
+        errorAttributes.remove("error");
         errorAttributes.put("timestamp_zh", timestampFormat);
 
         Throwable throwable = getError(webRequest);
@@ -57,13 +59,18 @@ public class BaseErrorAttributes extends DefaultErrorAttributes {
                     // 系统异常，打印堆栈信息。
                     log.warn("system exception, timestamp: {}", timestampFormat, throwable);
                 }
+                if (exception.getCode() == ErrorCodeConstants.SERVICE_ERROR) {
+                    // 当前环境没有使用系统异常和业务异常，这里就判断对应的ID 做处理打印堆栈信息。
+                    log.warn("service exception, timestamp: {}", timestampFormat, throwable);
+                }
 
-                ErrorCode errorCode = exception.getErrorCode();
-                String errorMessage = messageSource.getMessage(
-                        ERROR_CODE_PREFIX + errorCode.getCode(), exception.getParams(),
-                        errorCode.getMsg(), LocaleContextHolder.getLocale());
-                errorAttributes.put("errorCode", errorCode.getCode());
-                errorAttributes.put("errorMessage", errorMessage);
+                Locale locale = webRequest.getLocale();
+                String message = messageSource.getMessage(
+                        ResponseUtils.MESSAGE_PREFIX + exception.getCode(),
+                        exception.getParams(),
+                        exception.getMessage(), locale);
+                errorAttributes.put("code", exception.getCode());
+                errorAttributes.put("message", message);
             }
         }
 

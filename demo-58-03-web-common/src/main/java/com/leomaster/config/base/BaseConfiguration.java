@@ -11,4 +11,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(BaseProperties.class)
 @Configuration
 public class BaseConfiguration {
+    // TODO: suyh - 测试security
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
 }

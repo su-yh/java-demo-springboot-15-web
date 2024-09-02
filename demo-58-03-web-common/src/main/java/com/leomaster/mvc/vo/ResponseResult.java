@@ -1,37 +1,36 @@
 package com.leomaster.mvc.vo;
 
-import com.leomaster.constant.ErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 @Getter
-public class ResponseResult<T> extends BaseResult {
+public class ResponseResult<T> {
+    public static final Integer SUCCESS_CODE = 0;
+    public static final String SUCCESS_MSG = "SUCCESS";
 
     @Schema(description = "业务上的错误码，0 表示成功，其他表示失败。只有在status 的值为2xx 的时候该值才有效。")
-    private final Integer errorCode;
+    private final Integer code;
+
+    private final String message;
 
     @Schema(description = "成功时的响应数据，status 的值为2xx，同时errorCode 的值为0 时，该值才有效，否则没有意义。")
     private final T data;
 
-    private ResponseResult(ErrorCode errorCode) {
-        this.errorCode = errorCode.getCode();
-        this.data = null;
-    }
-
-    private ResponseResult(ErrorCode errorCode, T data) {
-        this.errorCode = errorCode.getCode();
+    private ResponseResult(Integer code, String message, T data) {
+        this.code = code;
+        this.message = message;
         this.data = data;
     }
 
     public static <T> ResponseResult<T> ofSuccess(T data) {
-        return new ResponseResult<>(ErrorCode.SUCCESS, data);
+        return new ResponseResult<>(SUCCESS_CODE, SUCCESS_MSG, data);
     }
 
     public static <T> ResponseResult<T> ofSuccess() {
-        return new ResponseResult<>(ErrorCode.SUCCESS);
+        return new ResponseResult<>(SUCCESS_CODE, SUCCESS_MSG, null);
     }
 
-    public static <T> ResponseResult<T> ofFail(ErrorCode errorCode) {
-        return new ResponseResult<>(errorCode);
+    public static <T> ResponseResult<T> ofFail(int code, String message) {
+        return new ResponseResult<>(code, message, null);
     }
 }

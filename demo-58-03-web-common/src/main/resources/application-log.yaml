@@ -3,11 +3,11 @@ logging:
   level:
     root: info
   file:
-    name: /app/logs/common-web/common-web.log
+    name: /tmp/userDataQueryPlatform/logs/userDataQueryPlatform.log
   logback:
     rollingpolicy:
       clean-history-on-start: true
-      file-name-pattern: /app/logs/common-web/%d{yyyy-MM-dd}/common-web.%02i.log
+      file-name-pattern: /tmp/userDataQueryPlatform/logs/%d{yyyy-MM-dd}/userDataQueryPlatform.%02i.log
       max-file-size: 20MB
 
 
@@ -21,13 +21,13 @@ spring:
 
 logging:
   level:
-    root: debug
+    root: info
   file:
-    name: /Users/suyunhong/suyh-develop/logs/common-web/common-web.log
+    name: /tmp/userDataQueryPlatform/logs/userDataQueryPlatform.log
   logback:
     rollingpolicy:
       clean-history-on-start: true
-      file-name-pattern: /Users/suyunhong/suyh-develop/logs/common-web/%d{yyyy-MM-dd}/common-web.%02i.log
+      file-name-pattern: /tmp/userDataQueryPlatform/logs/%d{yyyy-MM-dd}/userDataQueryPlatform.%02i.log
       max-file-size: 20MB
 
 
