@@ -1,9 +1,9 @@
-package com.suyh.mvc.error;
+package com.leomaster.mvc.error;
 
-import com.suyh.constant.ErrorCodeConstants;
-import com.suyh.mvc.exception.BaseException;
-import com.suyh.mvc.exception.ExceptionCategory;
-import com.suyh.util.ResponseUtils;
+import com.leomaster.constant.ErrorCodeConstants;
+import com.leomaster.mvc.exception.BaseException;
+import com.leomaster.mvc.exception.ExceptionCategory;
+import com.leomaster.util.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -21,12 +21,12 @@ import java.util.Map;
 /**
  * 派生自spring mvc 默认异常处理类
  * 添加一些自定义的响应属性值。
- *
+ * <p>
  * 参考：ErrorMvcAutoConfiguration#errorAttributes() 方法，创建的一个bean 对象
  * 这里的方法也是规划该方法的bean 实现，并在生成响应体里扩展自己的一些属性。
  * 但是如果是自定义的异常最好还是添加一个ControllerAdvice 的全局性的单独处理。
- *
- *
+ * <p>
+ * <p>
  * 4xx 5xx 都是错误，其他都不被识别为错误。
  * 但是200 的需要判断，最终都是通过 success 的boolean 结果判断成功与失败。
  * 以前的code 现在已经不用了

@@ -1,0 +1,20 @@
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh
+
+
+community:
+  base:
+    token-seconds: 36000
+    locales:
+      - language: "en"
+        country: "US"
+      - language: "zh"
+        country: "CN"
+
+

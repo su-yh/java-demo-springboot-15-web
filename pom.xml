@@ -22,6 +22,7 @@
         <module>demo-58-02-web-common</module>
         <module>demo-62-01-file-system</module>
         <module>demo-58-03-web-common</module>
+        <module>demo-58-04-web-common-non-security</module>
     </modules>
 
 
