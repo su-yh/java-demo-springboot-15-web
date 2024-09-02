@@ -2,7 +2,7 @@ package com.suyh.security.service;
 
 import com.suyh.constant.ErrorCodeConstants;
 import com.suyh.mvc.exception.ExceptionUtil;
-import com.suyh.mvc.login.LoginUser;
+import com.suyh.mvc.authentication.LoginUser;
 import com.suyh.security.UserToken;
 import com.suyh.util.TokenUtils;
 import io.jsonwebtoken.Claims;

@@ -1,4 +1,4 @@
-package com.suyh.mvc.login;
+package com.suyh.mvc.authentication;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

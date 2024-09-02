@@ -1,6 +1,6 @@
 package com.suyh.security.filter;
 
-import com.suyh.mvc.login.LoginUser;
+import com.suyh.mvc.authentication.LoginUser;
 import com.suyh.security.UserToken;
 import com.suyh.security.vo.SuyhAuthenticationToken;
 import org.springframework.http.HttpHeaders;

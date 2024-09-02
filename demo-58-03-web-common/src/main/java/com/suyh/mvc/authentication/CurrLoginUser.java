@@ -1,4 +1,4 @@
-package com.suyh.mvc.login;
+package com.suyh.mvc.authentication;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

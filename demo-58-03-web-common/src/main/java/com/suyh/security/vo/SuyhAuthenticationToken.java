@@ -1,6 +1,6 @@
 package com.suyh.security.vo;
 
-import com.suyh.mvc.login.LoginUser;
+import com.suyh.mvc.authentication.LoginUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 /**

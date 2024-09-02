@@ -1,8 +1,8 @@
 package com.suyh.mvc.configurer;
 
 import com.suyh.mvc.error.BaseHandlerExceptionResolver;
-import com.suyh.mvc.login.CurrUserArgumentResolver;
-import com.suyh.mvc.login.interceptor.LoginUserInterceptor;
+import com.suyh.mvc.authentication.CurrUserArgumentResolver;
+import com.suyh.mvc.authentication.interceptor.AuthenticationInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.lang.NonNull;
@@ -45,7 +45,7 @@ public class BaseWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(@NonNull InterceptorRegistry registry) {
-        LoginUserInterceptor loginInterceptor = new LoginUserInterceptor();
+        AuthenticationInterceptor loginInterceptor = new AuthenticationInterceptor();
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**");
     }
 }

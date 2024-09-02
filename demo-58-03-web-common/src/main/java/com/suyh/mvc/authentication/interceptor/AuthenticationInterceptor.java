@@ -1,8 +1,8 @@
-package com.suyh.mvc.login.interceptor;
+package com.suyh.mvc.authentication.interceptor;
 
 import com.suyh.constant.ErrorCodeConstants;
+import com.suyh.mvc.authentication.LoginUser;
 import com.suyh.mvc.exception.ExceptionUtil;
-import com.suyh.mvc.login.LoginUser;
 import com.suyh.util.TokenUtils;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @Slf4j
-public class LoginUserInterceptor implements HandlerInterceptor {
+public class AuthenticationInterceptor implements HandlerInterceptor {
     // 这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     @Override
-    public boolean preHandle(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+    public boolean preHandle(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull Object handler) throws Exception {
         // TODO: suyh - 测试security
         if (true) {
             return true;

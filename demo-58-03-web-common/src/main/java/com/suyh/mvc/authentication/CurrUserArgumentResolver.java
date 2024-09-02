@@ -1,4 +1,4 @@
-package com.suyh.mvc.login;
+package com.suyh.mvc.authentication;
 
 import com.suyh.constant.ErrorCodeConstants;
 import com.suyh.mvc.exception.ExceptionUtil;
