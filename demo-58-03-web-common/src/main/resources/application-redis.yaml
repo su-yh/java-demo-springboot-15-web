@@ -4,23 +4,7 @@ spring:
   redis:
     timeout: PT1S
     connect-timeout: PT5S
-    lettuce:
-      pool:
-        enabled: true
-        max-active: 1000
-        max-wait: PT2S
-        max-idle: 500
-        min-idle: 10
 
-
----
-spring:
-  config:
-    activate:
-      on-profile: suyh
-
-
-  redis:
     host: 192.168.8.43
     port: 6379 # 端口
     password: aiteer

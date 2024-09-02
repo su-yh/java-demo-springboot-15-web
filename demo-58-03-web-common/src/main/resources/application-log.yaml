@@ -1,23 +1,4 @@
 
-logging:
-  level:
-    root: info
-  file:
-    name: /tmp/userDataQueryPlatform/logs/userDataQueryPlatform.log
-  logback:
-    rollingpolicy:
-      clean-history-on-start: true
-      file-name-pattern: /tmp/userDataQueryPlatform/logs/%d{yyyy-MM-dd}/userDataQueryPlatform.%02i.log
-      max-file-size: 20MB
-
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: suyh
-
 
 logging:
   level:
