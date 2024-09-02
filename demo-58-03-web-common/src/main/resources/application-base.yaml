@@ -1,11 +1,11 @@
 
 
 
----
-spring:
-  config:
-    activate:
-      on-profile: suyh
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: suyh
 
 
 community:

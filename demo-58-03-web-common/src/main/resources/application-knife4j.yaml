@@ -17,5 +17,5 @@ springdoc:
     # 分组信息也可以在这里配置，在代码的配置类里面配置也是可以的。
     - group: 'user'
       paths-to-match: "/user/**"
-      packages-to-scan: "com.leomaster.business.controller"
+      packages-to-scan: "com.suyh.business.controller"
 
