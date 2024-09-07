@@ -4,8 +4,10 @@ import com.suyh6201.config.properties.VcsProperties;
 import com.suyh6201.dto.FileStoreLocationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -52,18 +54,20 @@ public class VcsFileSystemComponent {
             String originalFilename = sourceFile.getOriginalFilename();
 
             assert originalFilename != null;
-            int index = originalFilename.lastIndexOf(".");
-            String fileSuffix = ""; // 文件扩展名
-            if (index > 0) {
-                fileSuffix = originalFilename.substring(index);
-            }
+            String extension = FilenameUtils.getExtension(sourceFile.getOriginalFilename());
 
             String fileNameUuid = UUID.randomUUID().toString().replace("-", "");
-            String fileFullName = fileNameUuid + fileSuffix;
-            String filePath = fileDirPrefix + fileFullName;
+            if (StringUtils.hasText(extension)) {
+                fileNameUuid = fileNameUuid + "." + extension;
+            }
 
+            String filePath = fileDirPrefix + fileNameUuid;
+
+            // 文件扩展名
             File dest = new File(filePath);
             try {
+                // 目录不存在时，创建目录
+                dest.getParentFile().mkdirs();
                 sourceFile.transferTo(dest);
             } catch (Exception exception) {
                 log.error("transferTo failed, filepath: {}", filePath, exception);
