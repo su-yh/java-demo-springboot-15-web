@@ -16,5 +16,8 @@ spring:
       exchange: "suyhExchange"
       routing-key: "suyhRoutingKey"
       default-receive-queue: "defaultQueue"
-
+    listener:
+      simple:
+        acknowledge-mode: manual
+    dynamic: false
 

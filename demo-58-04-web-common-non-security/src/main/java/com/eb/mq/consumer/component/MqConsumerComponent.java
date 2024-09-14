@@ -2,6 +2,7 @@ package com.eb.mq.consumer.component;
 
 import com.eb.mq.consumer.dto.MqMessageConsumerDto;
 import com.eb.mq.consumer.dto.enums.MqMessageConsumerEnums;
+import com.eb.util.JsonUtils;
 import com.rabbitmq.client.Channel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +18,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MqConsumerComponent {
     // 接收rabbit mq队列里面的消息
-    @RabbitListener(queues = "${spring.rabbitmq.svip.template.default-receive-queue}", containerFactory = "rabbitListenerContainerFactory")
+    @RabbitListener(queues = "${spring.rabbitmq.template.default-receive-queue}", containerFactory = "rabbitListenerContainerFactory")
     public void processMessage(MqMessageConsumerDto mqMessageConsumerDto, Channel channel, @Headers Map<String, Object> headers) {
         try {
             // 处理消息
             if (mqMessageConsumerDto.getMessageCategoryCode() == MqMessageConsumerEnums.NOTICE.getCode()) {
                 // 处理通知消息
-                System.out.println(mqMessageConsumerDto.getNoticeToAgent());
+                System.out.println(JsonUtils.serializable(mqMessageConsumerDto.getNoticeToAgent()));
             } else {
                 log.error("不支持的消息类型 mqMessageConsumerDto.getMessageCategoryCode():{}", mqMessageConsumerDto.getMessageCategoryCode());
             }

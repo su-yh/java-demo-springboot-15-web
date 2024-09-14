@@ -1,4 +1,4 @@
-package com.leomaster.mq.config;
+package com.eb.mq.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
