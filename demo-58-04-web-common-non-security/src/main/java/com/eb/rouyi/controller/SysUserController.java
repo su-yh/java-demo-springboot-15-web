@@ -3,6 +3,7 @@ package com.eb.rouyi.controller;
 import com.eb.constant.ErrorCodeConstants;
 import com.eb.mvc.authentication.CurrLoginUser;
 import com.eb.mvc.authentication.LoginUser;
+import com.eb.mvc.authentication.annotation.Permit;
 import com.eb.mvc.exception.ExceptionUtil;
 import com.eb.rouyi.domain.AjaxResult;
 import com.eb.rouyi.entity.SysRole;
@@ -80,7 +81,8 @@ public class SysUserController extends BaseController
 
 //    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
 //    @PreAuthorize("@ss.hasPermi('system:user:export')")
-    @PostMapping("/export")
+    @Permit(required = false)
+    @GetMapping("/export")
     public void export(WebRequest webRequest,  HttpServletResponse response, SysUser user)
     {
         List<SysUser> list = userService.selectUserList(user);

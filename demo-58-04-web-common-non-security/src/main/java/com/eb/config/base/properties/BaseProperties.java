@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @Validated
 @Data
 public class BaseProperties {
-    public static final String PREFIX = "community.base";
+    public static final String PREFIX = "eb.base";
 
     /**
      * token 的有效时间

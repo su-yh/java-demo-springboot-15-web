@@ -41,11 +41,11 @@ logging:
   level:
     root: info
   file:
-    name: /home/suyunhong/back-end/community-ebusiness-manager/logs/communityEbusiness.log
+    name: /home/suyunhong/back-end/eb-ebusiness-manager/logs/communityEbusiness.log
   logback:
     rollingpolicy:
       clean-history-on-start: true
-      file-name-pattern: /home/suyunhong/back-end/community-ebusiness-manager/logs/%d{yyyy-MM-dd}/communityEbusiness.%02i.log
+      file-name-pattern: /home/suyunhong/back-end/eb-ebusiness-manager/logs/%d{yyyy-MM-dd}/communityEbusiness.%02i.log
       max-file-size: 20MB
 
 

@@ -1,4 +1,4 @@
-community:
+eb:
   base:
     file-upload:
       dir: /tmp/cem
@@ -12,7 +12,7 @@ spring:
       on-profile: suyh
 
 
-community:
+eb:
   base:
     token-seconds: 36000
     captcha:
@@ -28,7 +28,7 @@ spring:
     activate:
       on-profile: suyh_dev
 
-community:
+eb:
   base:
     token-seconds: 36000
     captcha:
@@ -41,7 +41,7 @@ spring:
     activate:
       on-profile: dev
 
-community:
+eb:
   base:
     file-upload:
       dir: /tmp/cem
@@ -53,7 +53,7 @@ spring:
     activate:
       on-profile: wtdev
 
-community:
+eb:
   base:
     file-upload:
       dir: /tmp/

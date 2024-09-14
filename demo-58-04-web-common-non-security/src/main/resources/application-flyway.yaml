@@ -9,7 +9,7 @@ spring:
     activate:
       on-profile: suyh
 
-community:
+eb:
   base:
     flyway-cds-mysql:
       enabled: true
@@ -27,7 +27,7 @@ spring:
     activate:
       on-profile: suyh_dev
 
-community:
+eb:
   base:
     flyway-cds-mysql:
       enabled: true
@@ -44,7 +44,7 @@ spring:
     activate:
       on-profile: dev
 
-community:
+eb:
   base:
     flyway-cds-mysql:
       enabled: true
@@ -61,7 +61,7 @@ spring:
     activate:
       on-profile: wtdev
 
-community:
+eb:
   base:
     flyway-cds-mysql:
       enabled: true

@@ -8,7 +8,7 @@
 #      on-profile: suyh
 
 
-community:
+eb:
   base:
     token-seconds: 36000
     locales:

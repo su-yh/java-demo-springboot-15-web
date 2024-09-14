@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Bean;
 @RequiredArgsConstructor
 public class MultiDbFlywayConfiguration {
 
-    @ConditionalOnProperty(name = "community.base.flyway-cds-mysql.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "eb.base.flyway-cds-mysql.enabled", havingValue = "true")
     @Bean("cdsMysqlFlyway")
     public FlywayMigrationInitializer cdsMysqlFlyway(
             DynamicDataSourceProviderProperties dynamicDataSourceProviderProperties,
@@ -37,7 +37,7 @@ public class MultiDbFlywayConfiguration {
         return new FlywayMigrationInitializer(cdsWebFlyway, null);
     }
 
-    @ConditionalOnProperty(name = "community.base.flyway-cds-pgsql.enabled", havingValue = "true")
+    @ConditionalOnProperty(name = "eb.base.flyway-cds-pgsql.enabled", havingValue = "true")
     @Bean("cdsPgsqlFlyway")
     public FlywayMigrationInitializer pgFlyway(
             DynamicDataSourceProviderProperties dynamicDataSourceProviderProperties,
