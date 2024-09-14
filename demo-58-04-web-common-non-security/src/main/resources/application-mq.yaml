@@ -1,0 +1,79 @@
+spring:
+  rabbitmq:
+    svip:
+      template:
+        default-receive-queue: "RecvQueueCEM"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh,suyh_dev
+
+  rabbitmq:
+    primary:
+      host: "192.168.8.43"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/primary"
+    svip:
+      host: "192.168.8.43"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/svip"
+      template:
+        exchange: "exchangeCem"
+        routing-key: "keyCem"
+        default-receive-queue: "RecvQueueCEM"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  rabbitmq:
+    primary:
+      host: "192.168.8.50"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/primary"
+    svip:
+      host: "192.168.8.50"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/svip"
+      template:
+        exchange: "exchangeCem"
+        routing-key: "keyCem"
+        default-receive-queue: "RecvQueueCEM"
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: wtdev
+
+  rabbitmq:
+    primary:
+      host: "192.168.8.43"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/primary"
+    svip:
+      host: "192.168.8.43"
+      port: 5672
+      username: "admin"
+      password: "adminadmin"
+      virtual-host: "/cem/svip"
+      template:
+        exchange: "exchangeCem"
+        routing-key: "keyCem"
+        default-receive-queue: "RecvQueueCEM"
+

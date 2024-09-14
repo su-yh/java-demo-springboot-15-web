@@ -1,3 +1,7 @@
+community:
+  base:
+    file-upload:
+      dir: /tmp/cem
 
 
 
@@ -11,10 +15,45 @@ spring:
 community:
   base:
     token-seconds: 36000
-    locales:
-      - language: "en"
-        country: "US"
-      - language: "zh"
-        country: "CN"
+    captcha:
+      two-factor-auth-enabled: false
+    file-upload:
+      dir: D:\tmp\cem
 
 
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh_dev
+
+community:
+  base:
+    token-seconds: 36000
+    captcha:
+      two-factor-auth-enabled: false
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+community:
+  base:
+    file-upload:
+      dir: /tmp/cem
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: wtdev
+
+community:
+  base:
+    file-upload:
+      dir: /tmp/

@@ -8,10 +8,12 @@ spring:
       - application-knife4j.yaml
       - application-log.yaml
       - application-message_source.yaml
+      - application-mq.yaml
       - application-mybatis.yaml
       - application-redis.yaml
       - application-spring.yaml
       - application-web.yaml
+      - application-tgbot.yaml
 
 
 

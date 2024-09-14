@@ -17,11 +17,17 @@
 
         <mybatisplus.version>3.5.5</mybatisplus.version>
         <dynamic-datasource.version>3.6.1</dynamic-datasource.version>
-        <knife4j.version>4.3.0</knife4j.version>
+        <knife4j.version>4.4.0</knife4j.version>
 
         <flyway.version>7.15.0</flyway.version>
-    </properties>
 
+        <poi.version>4.1.2</poi.version>
+        <commons.io.version>2.13.0</commons.io.version>
+
+        <googleauth.version>1.5.0</googleauth.version>
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
+        <shiro.version>1.13.0</shiro.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -55,8 +61,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>
@@ -107,6 +113,58 @@
             <artifactId>flyway-core</artifactId>
             <version>${flyway.version}</version>
         </dependency>
+
+        <!-- excel 工具 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <!-- io常用工具类 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <!-- 常用工具类 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.warrenstrange</groupId>
+            <artifactId>googleauth</artifactId>
+            <version>${googleauth.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- tgbot库 -->
+        <dependency>
+            <groupId>com.github.pengrad</groupId>
+            <artifactId>java-telegram-bot-api</artifactId>
+            <version>7.8.0</version>
+        </dependency>
+
+        <!-- pagehelper 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.boot.version}</version>
+        </dependency>
+
+        <!-- Shiro使用EhCache缓存框架 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -122,60 +180,16 @@
         </dependencies>
     </dependencyManagement>
 
-
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <!-- The configuration of the plugin -->
-                <configuration>
-                    <!-- Configuration of the archiver -->
-                    <archive>
-                        <!-- 生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
-                        <addMavenDescriptor>false</addMavenDescriptor>
-
-                        <!-- Manifest specific configuration -->
-                        <manifest>
-                            <!-- 是否要把第三方jar放到manifest的classpath中 -->
-                            <addClasspath>true</addClasspath>
-                            <!-- 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ -->
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <!-- 应用的main class -->
-                            <mainClass>com.suyh5804.Suyh5804Application</mainClass>
-                        </manifest>
-                    </archive>
-                    <!-- 过滤掉不希望包含在jar中的文件 -->
-                    <excludes>
-                        <exclude>${project.basedir}/xml/*</exclude>
-                    </excludes>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- The configuration of maven-assembly-plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4</version>
-                <!-- The configuration of the plugin -->
-                <configuration>
-                    <!-- Specifies the configuration file of the assembly plugin -->
-                    <descriptors>
-                        <descriptor>src/main/java/package.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>

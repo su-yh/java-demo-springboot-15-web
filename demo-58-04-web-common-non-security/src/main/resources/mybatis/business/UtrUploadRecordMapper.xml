@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eb.mp.mysql.mapper.business.UtrUploadRecordMapper">
+
+    <resultMap type="com.eb.mp.mysql.entity.business.UtrUploadRecordEntity"
+               id="UtrUploadRecordEntity">
+        <id column="id" jdbcType="BIGINT" property="id" javaType="java.lang.Long"/>
+
+        <result column="pn" jdbcType="VARCHAR" property="pn" javaType="java.lang.String"/>
+        <result column="buyer_uid" jdbcType="VARCHAR" property="buyerUid" javaType="java.lang.String"/>
+        <result column="pnum" jdbcType="VARCHAR" property="pnum" javaType="java.lang.String"/>
+        <result column="type" jdbcType="TINYINT" property="type" javaType="com.eb.constant.enums.AuditRecordTypeEnums" typeHandler="com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler"/>
+        <result column="cp_order" jdbcType="VARCHAR" property="cpOrder" javaType="java.lang.String"/>
+        <result column="cp_order_revise" jdbcType="VARCHAR" property="cpOrderRevise" javaType="java.lang.String"/>
+        <result column="amount" jdbcType="NUMERIC" property="amount" javaType="java.math.BigDecimal"/>
+        <result column="svip_order_no" jdbcType="VARCHAR" property="svipOrderNo" javaType="java.lang.String"/>
+        <result column="utr" jdbcType="VARCHAR" property="utr" javaType="java.lang.String"/>
+        <result column="pay_screenshot_url" jdbcType="VARCHAR" property="payScreenshotUrl" javaType="java.lang.String"/>
+        <result column="pay_amount" jdbcType="NUMERIC" property="payAmount" javaType="java.math.BigDecimal"/>
+        <result column="hit" jdbcType="TINYINT" property="hit" javaType="com.eb.constant.enums.OrderMatchStatusEnums" typeHandler="com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler"/>
+        <result column="dates" jdbcType="INTEGER" property="dates" javaType="java.lang.Integer"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created" javaType="java.util.Date"/>
+        <result column="updated" jdbcType="TIMESTAMP" property="updated" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="columns">
+        id, pn, buyer_uid, pnum, type, cp_order, cp_order_revise, amount, svip_order_no, utr,
+          pay_screenshot_url, pay_amount, hit, dates, created, updated
+    </sql>
+
+    <select id="queryListByAuditOrder" resultMap="UtrUploadRecordEntity">
+        select <include refid="columns"/>
+        from utr_upload_record
+        where hit = 1 and cp_order = #{order}
+        union all
+        select <include refid="columns"/>
+        from utr_upload_record
+        where hit = 0 and cp_order_revise = #{order}
+        order by created desc, id desc
+    </select>
+
+</mapper>

@@ -1,0 +1,21 @@
+CREATE TABLE utr_upload_record (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  pn varchar(20) DEFAULT NULL COMMENT 'pn',
+  buyer_uid varchar(50) DEFAULT NULL COMMENT '买家uid',
+  pnum varchar(50) DEFAULT NULL COMMENT '代理手机号',
+  type tinyint(1) unsigned DEFAULT NULL COMMENT '审计录入类型[1-买家提交 ｜ 2-后台录入]',
+  cp_order varchar(50) DEFAULT NULL COMMENT 'cp_order',
+  amount decimal(20,2) DEFAULT NULL COMMENT '订单金额',
+  svip_order_no varchar(50) DEFAULT NULL COMMENT 'svip订单号',
+  utr varchar(50) DEFAULT NULL COMMENT '录入的utr',
+  pay_screenshot_url varchar(1000) DEFAULT NULL COMMENT '付款截图',
+  pay_amount decimal(20,2) DEFAULT NULL COMMENT '付款确认金额(买家提交 ｜ 后台录入）',
+  hit tinyint(1) unsigned DEFAULT NULL COMMENT '订单匹配状态[0-未匹配 ｜ 1-已匹配]',
+  dates int(8) unsigned DEFAULT NULL COMMENT '日期',
+  created datetime DEFAULT NULL COMMENT '创建时间',
+  updated datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (id),
+  KEY idx_cp_order (cp_order),
+  KEY idx_dates (dates),
+  KEY idx_svip_order_no (svip_order_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='utr信息上传记录表';  

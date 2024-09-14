@@ -3,11 +3,11 @@ logging:
   level:
     root: info
   file:
-    name: /tmp/userDataQueryPlatform/logs/userDataQueryPlatform.log
+    name: /tmp/communityEbusiness/logs/communityEbusiness.log
   logback:
     rollingpolicy:
       clean-history-on-start: true
-      file-name-pattern: /tmp/userDataQueryPlatform/logs/%d{yyyy-MM-dd}/userDataQueryPlatform.%02i.log
+      file-name-pattern: /tmp/communityEbusiness/logs/%d{yyyy-MM-dd}/communityEbusiness.%02i.log
       max-file-size: 20MB
 
 
@@ -23,11 +23,29 @@ logging:
   level:
     root: info
   file:
-    name: /tmp/userDataQueryPlatform/logs/userDataQueryPlatform.log
+    name: /tmp/communityEbusiness/logs/communityEbusiness.log
   logback:
     rollingpolicy:
       clean-history-on-start: true
-      file-name-pattern: /tmp/userDataQueryPlatform/logs/%d{yyyy-MM-dd}/userDataQueryPlatform.%02i.log
+      file-name-pattern: /tmp/communityEbusiness/logs/%d{yyyy-MM-dd}/communityEbusiness.%02i.log
+      max-file-size: 20MB
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh_dev
+
+
+logging:
+  level:
+    root: info
+  file:
+    name: /home/suyunhong/back-end/community-ebusiness-manager/logs/communityEbusiness.log
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
+      file-name-pattern: /home/suyunhong/back-end/community-ebusiness-manager/logs/%d{yyyy-MM-dd}/communityEbusiness.%02i.log
       max-file-size: 20MB
 
 

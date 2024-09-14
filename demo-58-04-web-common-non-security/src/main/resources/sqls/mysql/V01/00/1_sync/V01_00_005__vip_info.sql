@@ -1,0 +1,37 @@
+CREATE TABLE vip_info
+(
+    id                    bigint(20)  NOT NULL AUTO_INCREMENT COMMENT '主键',
+    code                  varchar(20) NOT NULL COMMENT '代理code',
+    uid                   varchar(50) NOT NULL COMMENT 'uid',
+    ranking               int(11)             DEFAULT NULL COMMENT '排名',
+    sequence              int(11)             DEFAULT NULL COMMENT '顺序',
+    enable                tinyint(4)          DEFAULT NULL COMMENT '是否启用[0:不启用，1:启用]',
+    `show`                tinyint(4)          DEFAULT NULL COMMENT '列表是否展示[0:不展示，1:展示]',
+    evaluate              int(11)             DEFAULT NULL COMMENT '评价',
+    pnum                  varchar(20)         DEFAULT NULL COMMENT '电话号码',
+    pn                    varchar(20)         DEFAULT NULL COMMENT 'cp简称',
+    balance               decimal(20, 2)      DEFAULT NULL COMMENT '余额',
+    icon                  varchar(255)        DEFAULT NULL COMMENT '图标',
+    name                  varchar(255)        DEFAULT NULL COMMENT '名称',
+    transfer_balance      decimal(20, 2)      DEFAULT NULL COMMENT '总销售额',
+    transfer_count        int(11)             DEFAULT NULL COMMENT '发货订单数',
+    contact_details       text COMMENT '联系方式',
+    remark                int(11)             DEFAULT NULL COMMENT '备注',
+    created               timestamp   NULL    DEFAULT NULL COMMENT '创建时间',
+    created_by            varchar(150)        DEFAULT NULL COMMENT '创建人',
+    init_transfer_balance decimal(20, 2)      DEFAULT NULL COMMENT '初始余额',
+    init_transfer_count   int(11)             DEFAULT NULL COMMENT '初始订单数',
+    online                tinyint(4)          DEFAULT '1' COMMENT '是否在线时间[0:不在线，1:在线]',
+    online_day_of_week    varchar(255)        DEFAULT '1,2,3,4,5,6,7' COMMENT '工作日，周一到周日，用[,]分隔',
+    online_hour_of_day    varchar(255)        DEFAULT '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23' COMMENT '每日在线时段，0点-23点，用[,]分隔',
+    svip_audit_status     tinyint(1)          DEFAULT NULL COMMENT '是否审核通过 ( 0 未提交审核 | 1 审核中 | 2 审核通过 | 3 审核失败 | 4 已注销冻结）',
+    svip_system_online    tinyint(1) unsigned DEFAULT NULL COMMENT 'svip系统上下线状态[0: 下线 ｜ 1: 上线]',
+    svip_app_online       tinyint(1)          DEFAULT NULL COMMENT 'svip代理自身上下线[0: 下线 ｜ 1: 上线]',
+    svip_vip_type         tinyint(1)          DEFAULT NULL COMMENT '代理类型 预留（1自营，2代理）',
+    PRIMARY KEY (id) USING BTREE,
+    UNIQUE KEY idx_v_i_uid (uid) USING BTREE,
+    UNIQUE KEY idx_v_i_code (code) USING BTREE,
+    UNIQUE KEY idx_v_i_pnum (pnum) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 122
+  DEFAULT CHARSET = utf8mb4;

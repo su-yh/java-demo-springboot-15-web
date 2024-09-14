@@ -1,11 +1,12 @@
 
 
 knife4j:
-  enable: true
+  enable: false
   setting:
     language: zh_cn
 
 
+# swagger 页面访问： http://localhost:${server.servlet.context-path}/doc.html
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -15,7 +16,87 @@ springdoc:
     path: /v3/api-docs
   group-configs:
     # 分组信息也可以在这里配置，在代码的配置类里面配置也是可以的。
+    - group: 'ruoyi-system-user'
+      paths-to-match:
+        - "/system/user/**"
+      packages-to-scan:
+        - "com.eb.rouyi.controller"
+    - group: 'ruoyi-system-online'
+      paths-to-match:
+        - "/system/online/**"
+      packages-to-scan:
+        - "com.eb.rouyi.controller"
+    - group: 'ruoyi-system-role'
+      paths-to-match:
+        - "/system/role/**"
+      packages-to-scan:
+        - "com.eb.rouyi.controller"
+    - group: 'ruoyi-system-menu'
+      paths-to-match:
+        - "/system/menu/**"
+      packages-to-scan:
+        - "com.eb.rouyi.controller"
     - group: 'user'
-      paths-to-match: "/user/**"
-      packages-to-scan: "com.suyh5804.business.controller"
+      paths-to-match:
+        - "/user/**"
+      packages-to-scan:
+        - "com.eb.system.controller"
+    - group: 'file-system'
+      paths-to-match:
+        - "/system/file/**"
+      packages-to-scan:
+        - "com.eb.system.controller"
+    - group: "drop-down"
+      paths-to-match:
+        - "/dropDown/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "exception-order"
+      paths-to-match:
+        - "/exception/order/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "order"
+      paths-to-match:
+        - "/order/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "smart-sms"
+      paths-to-match:
+        - "/smart/sms/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "statistic"
+      paths-to-match:
+        - "/statistic/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "support-team"
+      paths-to-match:
+        - "/support/team/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "vip"
+      paths-to-match:
+        - "/vip/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+    - group: "weight-config"
+      paths-to-match:
+        - "/weight/config/**"
+      packages-to-scan:
+        - "com.eb.business.controller"
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh,suyh_dev,dev
+
+knife4j:
+  enable: true
+
+
+
 

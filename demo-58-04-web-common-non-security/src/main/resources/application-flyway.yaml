@@ -20,3 +20,54 @@ community:
       locations:
         - "sqls/pgsql"
 
+
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh_dev
+
+community:
+  base:
+    flyway-cds-mysql:
+      enabled: true
+      locations:
+        - "sqls/mysql"
+    flyway-cds-pgsql:
+      enabled: false
+      locations:
+        - "sqls/pgsql"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+community:
+  base:
+    flyway-cds-mysql:
+      enabled: true
+      locations:
+        - "sqls/mysql"
+    flyway-cds-pgsql:
+      enabled: false
+      locations:
+        - "sqls/pgsql"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: wtdev
+
+community:
+  base:
+    flyway-cds-mysql:
+      enabled: true
+      locations:
+        - "sqls/mysql"
+    flyway-cds-pgsql:
+      enabled: false
+      locations:
+        - "sqls/pgsql"

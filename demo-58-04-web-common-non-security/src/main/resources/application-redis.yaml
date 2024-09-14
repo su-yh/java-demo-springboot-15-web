@@ -1,5 +1,4 @@
 
-
 spring:
   redis:
     timeout: PT1S
@@ -19,16 +18,12 @@ spring:
     activate:
       on-profile: suyh
 
+# 目前暂时没用到redis
 
-  redis:
-    host: 192.168.8.43
-    port: 6379 # 端口
-    password: aiteer
-    database: 11
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 
 
