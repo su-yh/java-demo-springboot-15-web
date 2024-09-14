@@ -37,13 +37,6 @@ public class BaseProperties {
     @Valid
     private FileUploadProperties fileUpload = new FileUploadProperties();
 
-//    /**
-//     * 国际化配置，语言以及国家
-//     */
-//    @NestedConfigurationProperty
-//    @Valid
-//    private LocaleProperties[] locales = {};
-
     @NestedConfigurationProperty
     @Valid
     private CaptchaProperties captcha = new CaptchaProperties();

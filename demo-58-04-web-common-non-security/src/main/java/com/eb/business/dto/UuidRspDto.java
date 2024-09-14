@@ -1,4 +1,4 @@
-package com.eb.business.dto.sms.rsp;
+package com.eb.business.dto;
 
 /**
  * @author suyh

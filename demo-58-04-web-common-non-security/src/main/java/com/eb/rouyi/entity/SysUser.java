@@ -2,6 +2,9 @@ package com.eb.rouyi.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.eb.constant.enums.RuoyiEnableStatusEnums;
+import com.eb.rouyi.excel.annotation.RuoyiExcel;
+import com.eb.rouyi.excel.handler.ExcelEnumValueHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +27,8 @@ import java.util.Map;
 public class SysUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final String MESSAGE_PREFIX = "excel.title.SysUser";
+
     public static boolean isAdmin(Long userId) {
         return userId != null && 1L == userId;
     }
@@ -34,11 +39,13 @@ public class SysUser implements Serializable {
     @TableId(type = IdType.AUTO)
     @Getter
     @Setter
+    @RuoyiExcel(name = "id", nameCode = MESSAGE_PREFIX + ".id", cellType = RuoyiExcel.ColumnType.NUMERIC)
     private Long id;
 
     @Size(max = 64)
     @Getter
     @Setter
+    @RuoyiExcel(name = "username", nameCode = MESSAGE_PREFIX + ".username", cellType = RuoyiExcel.ColumnType.STRING)
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -50,6 +57,7 @@ public class SysUser implements Serializable {
     @Getter
     @Setter
     @Size(max = 64)
+    @RuoyiExcel(name = "nickname", nameCode = MESSAGE_PREFIX + ".nickname", cellType = RuoyiExcel.ColumnType.STRING)
     private String nickname;
 
     @JsonIgnore
@@ -96,24 +104,31 @@ public class SysUser implements Serializable {
 //    private String userName;
 
     /** 用户类型 */
+    @RuoyiExcel(name = "userType", nameCode = MESSAGE_PREFIX + ".userType", cellType = RuoyiExcel.ColumnType.STRING)
     private String userType;
 
     /** 用户邮箱 */
     @Email(message = "邮箱格式不正确")
     @Size(min = 0, max = 50, message = "邮箱长度不能超过50个字符")
+    @RuoyiExcel(name = "email", nameCode = MESSAGE_PREFIX + ".email", cellType = RuoyiExcel.ColumnType.STRING)
     private String email;
 
     /** 手机号码 */
+    @RuoyiExcel(name = "phonenumber", nameCode = MESSAGE_PREFIX + ".phonenumber", cellType = RuoyiExcel.ColumnType.STRING)
     private String phonenumber;
 
     /** 用户性别 */
+    @RuoyiExcel(name = "sex", nameCode = MESSAGE_PREFIX + ".sex", cellType = RuoyiExcel.ColumnType.STRING)
     private String sex;
 
     /** 用户头像 */
     private String avatar;
 
     /** 帐号状态（0正常 1停用） */
-    private String status;
+    @Getter
+    @Setter
+    @RuoyiExcel(name = "status", nameCode = MESSAGE_PREFIX + ".status", cellType = RuoyiExcel.ColumnType.STRING, handler = ExcelEnumValueHandler.class)
+    private RuoyiEnableStatusEnums status;
 
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
@@ -279,17 +294,6 @@ public class SysUser implements Serializable {
     public void setAvatar(String avatar)
     {
         this.avatar = avatar;
-    }
-
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
     }
 
     public String getDelFlag()

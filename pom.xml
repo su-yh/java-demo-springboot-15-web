@@ -16,11 +16,11 @@
     </properties>
 
     <modules>
-        <module>demo-22-validation-03</module>
-        <module>demo-56-01-HandlerMethodArgumentResolver</module>
-        <module>demo-58-03-web-common-use-security</module>
+<!--        <module>demo-22-validation-03</module>-->
+<!--        <module>demo-56-01-HandlerMethodArgumentResolver</module>-->
+<!--        <module>demo-58-03-web-common-use-security</module>-->
         <module>demo-58-04-web-common-non-security</module>
-        <module>demo-62-01-file-system</module>
+<!--        <module>demo-62-01-file-system</module>-->
     </modules>
 
 

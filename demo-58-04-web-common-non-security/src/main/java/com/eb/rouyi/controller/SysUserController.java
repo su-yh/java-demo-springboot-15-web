@@ -7,6 +7,7 @@ import com.eb.mvc.exception.ExceptionUtil;
 import com.eb.rouyi.domain.AjaxResult;
 import com.eb.rouyi.entity.SysRole;
 import com.eb.rouyi.entity.SysUser;
+import com.eb.rouyi.excel.poi.RuoyiExcelUtil;
 import com.eb.rouyi.page.TableDataInfo;
 import com.eb.rouyi.service.ISysRoleService;
 import com.eb.rouyi.service.ISysUserService;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,14 +80,14 @@ public class SysUserController extends BaseController
 
 //    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
 //    @PreAuthorize("@ss.hasPermi('system:user:export')")
-//    @PostMapping("/export")
-//    public void export(HttpServletResponse response, SysUser user)
-//    {
-//        List<SysUser> list = userService.selectUserList(user);
-//        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
-//        util.exportExcel(response, list, "用户数据");
-//    }
-//
+    @PostMapping("/export")
+    public void export(WebRequest webRequest,  HttpServletResponse response, SysUser user)
+    {
+        List<SysUser> list = userService.selectUserList(user);
+        RuoyiExcelUtil<SysUser> util = new RuoyiExcelUtil<>(SysUser.class, webRequest.getLocale());
+        util.exportExcel(response, list, "用户数据");
+    }
+
 //    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
 //    @PreAuthorize("@ss.hasPermi('system:user:import')")
 //    @PostMapping("/importData")

@@ -1,7 +1,5 @@
 package com.eb.business.dto;
 
-import com.eb.business.dto.sms.rsp.UuidRspDto;
-
 import java.util.List;
 import java.util.UUID;
 

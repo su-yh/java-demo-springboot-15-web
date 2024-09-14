@@ -1,4 +1,4 @@
-package com.eb.business.dto.user.req;
+package com.eb.system.dto.req;
 
 import lombok.Data;
 

@@ -8,9 +8,6 @@ import lombok.Getter;
  */
 @Getter
 public enum MqMessageConsumerEnums {
-    /**
-     * 业务端通知代理商消息
-     */
     NOTICE(1)
     ;
 

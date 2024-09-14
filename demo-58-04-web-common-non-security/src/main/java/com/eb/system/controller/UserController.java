@@ -1,11 +1,11 @@
 package com.eb.system.controller;
 
 import com.eb.business.dto.base.IdBody;
-import com.eb.business.dto.user.req.UserLoginReqDto;
 import com.eb.mvc.authentication.CurrLoginUser;
 import com.eb.mvc.authentication.LoginUser;
 import com.eb.mvc.authentication.annotation.Permit;
 import com.eb.mvc.vo.ResponseResult;
+import com.eb.system.dto.req.UserLoginReqDto;
 import com.eb.system.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
