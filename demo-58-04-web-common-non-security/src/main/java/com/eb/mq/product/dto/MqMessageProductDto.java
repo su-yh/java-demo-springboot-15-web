@@ -2,8 +2,6 @@ package com.eb.mq.product.dto;
 
 import com.eb.mq.product.dto.business.ExceptionOrderAuditPassMqDto;
 import com.eb.mq.product.dto.business.FinancialAccountModifyMqDto;
-import com.eb.mq.product.dto.business.SelectFinancialNoticeMqDto;
-import com.eb.mq.product.dto.business.VipInfoSvipAppOnlineMqDto;
 import com.eb.mq.product.dto.enums.MqMessageEventCategoryEnums;
 import lombok.Data;
 
@@ -27,21 +25,10 @@ public class MqMessageProductDto {
     private FinancialAccountModifyMqDto messageFinancialAccountModify;
 
     /**
-     * 代理商信息上下线
-     * @see MqMessageEventCategoryEnums#VIP_INFO_SVIP_APP_ONLINE
-     */
-    private VipInfoSvipAppOnlineMqDto messageVipInfoSvipAppOnline;
-
-    /**
      * 异常订单审核通过
      * @see MqMessageEventCategoryEnums#EXCEPTION_ORDER_AUDIT_SUCCESS
      */
     private ExceptionOrderAuditPassMqDto exceptionOrderAuditPass;
 
-    /**
-     * tgbot选择收款卡
-     * @see MqMessageEventCategoryEnums#SELECT_FINANCIAL_NOTICE
-     */
-    private SelectFinancialNoticeMqDto selectFinancialNotice;
 
 }

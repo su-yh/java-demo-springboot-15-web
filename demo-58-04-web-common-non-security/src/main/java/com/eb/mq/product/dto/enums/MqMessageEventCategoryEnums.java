@@ -16,9 +16,6 @@ public enum MqMessageEventCategoryEnums {
 
     // 异常订单审核通过
     EXCEPTION_ORDER_AUDIT_SUCCESS(3),
-
-    // 选择收款卡通知
-    SELECT_FINANCIAL_NOTICE(4),
     ;
 
     private final int code;

@@ -24,54 +24,6 @@ spring:
 #        password: suyh_mock_tmp
 #        driver-class-name: org.postgresql.Driver
 
----
-spring:
-  config:
-    activate:
-      on-profile: suyh_dev
-
-  datasource:
-    hikari:
-      cds-mysql:
-        jdbc-url: jdbc:mysql://192.168.8.43:3306/community_eb_mgr?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: community_eb_mgr
-        password: community_eb_mgr
-        driver-class-name: com.mysql.cj.jdbc.Driver
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-  datasource:
-    hikari:
-      cds-mysql:
-        jdbc-url: jdbc:mysql://192.168.8.50:3306/dev_cem?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: dev_cem
-        password: dev_cem
-        driver-class-name: com.mysql.cj.jdbc.Driver
-
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: wtdev
-
-  datasource:
-    hikari:
-      cds-mysql:
-        jdbc-url: jdbc:mysql://192.168.8.68:3306/cem-dev?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: tgbot
-        password: tgbot@#a1
-        driver-class-name: com.mysql.cj.jdbc.Driver
----
-spring:
-  config:
-    activate:
-      on-profile: prod
 
 
 

@@ -35,25 +35,3 @@ eb:
       two-factor-auth-enabled: false
 
 
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-eb:
-  base:
-    file-upload:
-      dir: /tmp/cem
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: wtdev
-
-eb:
-  base:
-    file-upload:
-      dir: /tmp/
