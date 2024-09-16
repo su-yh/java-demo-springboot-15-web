@@ -7,7 +7,7 @@ spring:
       on-profile: suyh,suyh_dev
 
   rabbitmq:
-    host: "192.168.8.43"
+    host: "hy-yun.isuyh.com"
     port: 5672
     username: "admin"
     password: "adminadmin"
