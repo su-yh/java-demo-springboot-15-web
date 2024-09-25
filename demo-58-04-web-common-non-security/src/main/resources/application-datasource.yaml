@@ -14,9 +14,9 @@ spring:
   datasource:
     hikari:
       cds-mysql:
-        jdbc-url: jdbc:mysql://192.168.8.43:3306/suyh_cem?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: suyh_cem
-        password: suyh_cem
+        jdbc-url: jdbc:mysql://hy-yun.isuyh.com:3306/suyh-personal?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: suyh-personal
+        password: suyh-personal
         driver-class-name: com.mysql.cj.jdbc.Driver
 #      cds-pgsql:
 #        jdbc-url: jdbc:postgresql://192.168.8.43:5432/suyh_mock_tmp?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
