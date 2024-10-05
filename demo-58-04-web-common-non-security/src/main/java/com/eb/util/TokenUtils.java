@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @Slf4j
 public final class TokenUtils {
-    private static final String secret = "108badb496bd4a529527b2ee9c82d539";
+    private static final String secret = "fd63a918dcaa44e68d78f0c806df9c41";
 
     public static final String NICK_NAME_KEY = "nickname";
 
@@ -40,7 +40,7 @@ public final class TokenUtils {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception exception) {
-            log.error("token parse failed.", exception);
+            log.error("token parse failed. token: {}", token, exception);
             return null;
         }
     }
