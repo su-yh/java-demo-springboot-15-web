@@ -5,8 +5,8 @@ spring:
 
 server:
   servlet:
-    context-path: /prod-api
-  port: 8916
+    context-path: /suyh
+  port: 8015
 
 
 ---

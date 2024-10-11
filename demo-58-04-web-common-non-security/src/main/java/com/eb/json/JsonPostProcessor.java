@@ -3,8 +3,7 @@ package com.eb.json;
 import com.eb.json.deserializer.BizStringDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.NumberSerializer;
-import com.eb.util.JsonUtils;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -29,15 +28,14 @@ public class JsonPostProcessor implements BeanPostProcessor {
             assert count.incrementAndGet() == 1;
 
             ObjectMapper objectMapper = (ObjectMapper) bean;
+
             SimpleModule simpleModule = new SimpleModule();
-            simpleModule.addSerializer(Long.class, NumberSerializer.instance)
-                    .addSerializer(Long.TYPE, NumberSerializer.instance);
+            simpleModule.addSerializer(Long.class, ToStringSerializer.instance)
+                    .addSerializer(Long.TYPE, ToStringSerializer.instance);
             simpleModule.addDeserializer(String.class, BizStringDeserializer.instance);
             objectMapper.registerModules(simpleModule);
-
-            // 同步 JsonUtils 与web 中使用的jackson 一致
-            JsonUtils.initMapper(objectMapper);
         }
+
         return bean;
     }
 }

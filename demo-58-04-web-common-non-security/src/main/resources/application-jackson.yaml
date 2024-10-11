@@ -5,7 +5,7 @@ spring:
     # 这样我们就不需要在每一个日期上面添加@format 注解就可以将其按下面的配置进行格式化
     # date-format: yyyy-MM-dd HH:mm:ss.SSS
     # time-zone: Asia/Shanghai
-    defaultPropertyInclusion: always   #非空属性才序列化
+    defaultPropertyInclusion: non_null   #非空属性才序列化
     deserialization:
       FAIL_ON_UNKNOWN_PROPERTIES: false # 未定义的key不序列化
     serialization:
