@@ -26,7 +26,7 @@ public class BizClassPoll {
          * 	... 8 more
          * Caused by: javassist.NotFoundException: com.zaxxer.hikari.pool.ProxyStatement
          *
-         * 在使用spring boot 插件打包之后，会有如上异常出现。可以将如下ClassLoader 添加进去就可以了。
+         * 在使用spring boot 插件打包之后，在线上运行时会有如上异常出现。可以将如下ClassLoader 添加进去就可以了。
          * 但是使用 maven-assembly-plugin  打包却没有这个问题
          */
         classPool.appendClassPath(new LoaderClassPath(Thread.currentThread().getContextClassLoader()));
