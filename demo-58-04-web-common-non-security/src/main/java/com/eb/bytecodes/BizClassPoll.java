@@ -1,6 +1,7 @@
 package com.eb.bytecodes;
 
 import javassist.ClassPool;
+import javassist.LoaderClassPath;
 
 /**
  * @author suyh
@@ -17,6 +18,18 @@ public class BizClassPoll {
 
     private static void init() {
         ClassPool classPool = ClassPool.getDefault();
+
+        /*
+         * Caused by: java.lang.RuntimeException: javassist.NotFoundException: com.zaxxer.hikari.pool.ProxyStatement
+         * 	at com.ebusiness.bytecodes.MybatisSqlDetailText.rebuildSqlDetail(MybatisSqlDetailText.java:21)
+         * 	at com.ebusiness.CommunityEbusinessManager.main(CommunityEbusinessManager.java:16)
+         * 	... 8 more
+         * Caused by: javassist.NotFoundException: com.zaxxer.hikari.pool.ProxyStatement
+         *
+         * 在使用spring boot 插件打包之后，会有如上异常出现。可以将如下ClassLoader 添加进去就可以了。
+         * 但是使用 maven-assembly-plugin  打包却没有这个问题
+         */
+        classPool.appendClassPath(new LoaderClassPath(Thread.currentThread().getContextClassLoader()));
         importPackages(classPool);
     }
 
