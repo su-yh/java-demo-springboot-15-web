@@ -2,6 +2,8 @@ spring:
   autoconfigure:
     exclude:
 #      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      # 排除该自动装配类，主要是用户信息我们自己处理，而不使用spring security 提供的那一套流程。
+      # 这个好像会弹出登录页面
       - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
 

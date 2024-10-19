@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MybatisPlusConfiguration {
     @Bean
-    public SqlHandler getSqlHandlerBean(){
+    public SqlHandler sqlHandler() {
         return new SqlHandler();
     }
 

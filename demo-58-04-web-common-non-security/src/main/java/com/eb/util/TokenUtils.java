@@ -21,7 +21,7 @@ public final class TokenUtils {
 
     public static String createToken(Map<String, Object> claims, Long id, String username, Integer tokenSeconds) {
         Date now = new Date();
-        Date expireDate = new Date(now.getTime() + tokenSeconds * 1000);
+        Date expireDate = new Date(now.getTime() + tokenSeconds * 1000L);
 
         return Jwts.builder()
                 .setClaims(claims)

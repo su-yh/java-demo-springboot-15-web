@@ -51,4 +51,13 @@ public final class DateUtils {
         Instant instant = date.toInstant();
         return instant.atZone(zoneId).toLocalDateTime();
     }
+
+    /**
+     * 日期差 = datesLast - datesStart
+     */
+    public static long diffDays(int datesStart, int datesLast) {
+        LocalDate localDateStart = DateUtils.convertToLocalDate(datesStart);
+        LocalDate localDateLast = DateUtils.convertToLocalDate(datesLast);
+        return localDateLast.toEpochDay() - localDateStart.toEpochDay();
+    }
 }

@@ -5,6 +5,7 @@ package com.eb.constant;
  * @since 2023-11-26
  */
 public final class ErrorCodeConstants {
+    public static final String ERROR_CODE_PREFIX = "error.code";
 
     public static final int REFUSE_MODIFY_ADMIN_USER = 1013001;
     public static final int REFUSE_MODIFY_ADMIN_ROLE = 1013002;

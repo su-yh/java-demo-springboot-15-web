@@ -13,10 +13,14 @@ public class ResponseResult<T> {
 
     private final T data;
 
-    private ResponseResult(Integer code, String message, T data) {
+    protected ResponseResult(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    public static <T> ResponseResult<T> ofSuccess(T data, String message) {
+        return new ResponseResult<>(SUCCESS_CODE, message, data);
     }
 
     public static <T> ResponseResult<T> ofSuccess(T data) {

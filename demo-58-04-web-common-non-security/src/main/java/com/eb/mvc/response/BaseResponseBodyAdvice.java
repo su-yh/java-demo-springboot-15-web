@@ -19,27 +19,44 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  */
 @ControllerAdvice
 public class BaseResponseBodyAdvice implements ResponseBodyAdvice<Object> {
-    @Override
-    public boolean supports(@NonNull MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
-        Class<?> containingClass = returnType.getContainingClass();
+    /**
+     * 是否支持将返回值重新封装
+     *
+     * @param containingClass       controller 类对象
+     * @param returnClass           返回值的类对象
+     * @param wrapperResponseAdvice 方法注解
+     * @return true: 支持，false: 禁止
+     */
+    public static boolean supportsWrapper(
+            Class<?> containingClass, Class<?> returnClass, WrapperResponseAdvice wrapperResponseAdvice) {
+
         if (!containingClass.getPackage().getName().startsWith("com.eb.business.controller")) {
             return false;
         }
 
-        if (ResponseEntity.class.isAssignableFrom(returnType.getParameterType())) {
-            return false;
+        if (returnClass != null) {
+            if (ResponseEntity.class.isAssignableFrom(returnClass)) {
+                return false;
+            }
+
+            if (ResponseResult.class.isAssignableFrom(returnClass)) {
+                return false;
+            }
         }
 
-        if (ResponseResult.class.isAssignableFrom(returnType.getParameterType())) {
-            return false;
-        }
-
-        WrapperResponseAdvice wrapperResponseAdvice = returnType.getMethodAnnotation(WrapperResponseAdvice.class);
         if (wrapperResponseAdvice != null && !wrapperResponseAdvice.enabled()) {
             return false;
         }
 
         return true;
+    }
+
+    @Override
+    public boolean supports(@NonNull MethodParameter returnType, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
+        Class<?> containingClass = returnType.getContainingClass();
+        WrapperResponseAdvice wrapperResponseAdvice = returnType.getMethodAnnotation(WrapperResponseAdvice.class);
+
+        return BaseResponseBodyAdvice.supportsWrapper(containingClass, returnType.getParameterType(), wrapperResponseAdvice);
     }
 
     @Override
