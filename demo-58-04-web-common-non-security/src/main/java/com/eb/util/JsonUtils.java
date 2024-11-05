@@ -21,9 +21,11 @@ import java.util.Map;
 public class JsonUtils {
     private static volatile ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public static void initMapper(ObjectMapper mapper) {
-        OBJECT_MAPPER = mapper;
+    static {
+        initMapper(OBJECT_MAPPER);
+    }
 
+    public static void initMapper(ObjectMapper mapper) {
         // 序列化的时候对null 属性进行忽略，所有的null 属性都不会被序列化到json 中。
         // ignored non null field
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

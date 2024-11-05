@@ -1,23 +1,23 @@
 package com.eb.json;
 
 import com.eb.json.deserializer.BizStringDeserializer;
+import com.eb.util.JsonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.NumberSerializer;
-import com.eb.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author suyh
  * @since 2024-03-11
+ * @deprecated 使用 {@link PackMapperCustomizer} 替代
  */
-@Component
+//@Component
 @Slf4j
 public class JsonPostProcessor implements BeanPostProcessor {
     private final AtomicInteger count = new AtomicInteger(0);
