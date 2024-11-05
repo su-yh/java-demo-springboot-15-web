@@ -1,6 +1,8 @@
 package com.eb.mvc.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.eb.constant.CommunityConstants;
+import com.eb.mp.handler.SqlHandler;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
@@ -13,25 +15,29 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 @WebFilter("/**")
-public class LogTraceFilter implements Filter {
-    /**
-     * 日志追踪
-     */
-    public static final String LOG_TRACE_TAG = "log-trace-id";
+public class TraceFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        String logTraceId = IdWorker.getIdStr();
+        Long traceId = IdWorker.getId();
         // 生成或获取 traceId，这里使用 UUID 作为示例
         // 将 traceId 放入 MDC
-        MDC.put(LOG_TRACE_TAG, logTraceId);
-        response.setHeader(LOG_TRACE_TAG, logTraceId);
-        filterChain.doFilter(request, response);
-        MDC.remove(LOG_TRACE_TAG);
+        MDC.put(CommunityConstants.TRACE_ID, traceId + "");
+        response.setHeader(CommunityConstants.TRACE_ID, traceId + "");
+        request.setAttribute(CommunityConstants.TRACE_ID, traceId);
+        SqlHandler.AUDIT_SQL_LIST.set(new ArrayList<>());
+
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            SqlHandler.AUDIT_SQL_LIST.remove();
+            MDC.remove(CommunityConstants.TRACE_ID);
+        }
     }
 }

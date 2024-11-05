@@ -30,13 +30,14 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Slf4j
 @Intercepts({
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
 })
+@Slf4j
 public class SqlHandler implements Interceptor {
+    public static final ThreadLocal<List<String>> AUDIT_SQL_LIST = new ThreadLocal<>();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -89,8 +90,18 @@ public class SqlHandler implements Interceptor {
                             }
                         }
                     }
-                    log.info("Executed SQL Database product: {}, URL: {}, sql: {}",
-                            metaData.getDatabaseProductName(), extractHost(metaData.getURL()), preparedStatement.toString());
+                }
+
+                String sqlDetail = preparedStatement.toString();
+                log.info("Executed SQL Database product: {}, URL: {}, sql: \n{}",
+                        metaData.getDatabaseProductName(), extractHost(metaData.getURL()), sqlDetail);
+
+                String name = invocation.getMethod().getName();
+                if (name.equalsIgnoreCase("update")) {
+                    List<String> sqlList = SqlHandler.AUDIT_SQL_LIST.get();
+                    if (sqlList != null) {
+                        sqlList.add(sqlDetail);
+                    }
                 }
             }
         } catch (SQLException e) {

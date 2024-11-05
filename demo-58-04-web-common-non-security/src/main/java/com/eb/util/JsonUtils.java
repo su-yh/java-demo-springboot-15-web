@@ -19,10 +19,11 @@ import java.util.Map;
 
 @Slf4j
 public class JsonUtils {
-    private static volatile ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-        initMapper(OBJECT_MAPPER);
+        // 同步 JsonUtils 与web 中使用的jackson 一致
+        JsonUtils.initMapper(OBJECT_MAPPER);
     }
 
     public static void initMapper(ObjectMapper mapper) {

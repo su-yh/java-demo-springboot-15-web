@@ -1,5 +1,6 @@
 package com.eb.rouyi.controller;
 
+import com.eb.aop.AuditOperation;
 import com.eb.constant.ErrorCodeConstants;
 import com.eb.mvc.authentication.CurrLoginUser;
 import com.eb.mvc.authentication.LoginUser;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -83,7 +85,7 @@ public class SysUserController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:user:export')")
     @Permit(required = false)
     @GetMapping("/export")
-    public void export(WebRequest webRequest,  HttpServletResponse response, SysUser user)
+    public void export(WebRequest webRequest, HttpServletResponse response, SysUser user)
     {
         List<SysUser> list = userService.selectUserList(user);
         RuoyiExcelUtil<SysUser> util = new RuoyiExcelUtil<>(SysUser.class, webRequest.getLocale());
@@ -136,8 +138,14 @@ public class SysUserController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:user:add')")
 //    @Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @AuditOperation("@audit.auditRecord(" +
+            "T(com.eb.constant.enums.AuditEnums).SYSTEM_USER_CREATE, " +
+            "#spelReturnValue, #request, #loginUser, " +
+            "#user)")
     @PostMapping()
     public AjaxResult add(
+            @SuppressWarnings("unused") HttpServletRequest request,
+            @SuppressWarnings("unused")  @Parameter(hidden = true) @CurrLoginUser LoginUser loginUser,
             @Validated @RequestBody SysUser user)
     {
 //        deptService.checkDeptDataScope(user.getDeptId());
@@ -161,8 +169,13 @@ public class SysUserController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:user:edit')")
 //    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @AuditOperation("@audit.auditRecord(" +
+            "T(com.eb.constant.enums.AuditEnums).SYSTEM_USER_EDIT, " +
+            "#spelReturnValue, #request, #loginUser, " +
+            "#user)")
     @PutMapping()
     public AjaxResult edit(
+            @SuppressWarnings("unused") HttpServletRequest request,
             @Parameter(hidden = true) @CurrLoginUser LoginUser loginUser,
             @Validated @RequestBody SysUser user)
     {
@@ -232,8 +245,13 @@ public class SysUserController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:user:remove')")
 //    @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    @AuditOperation("@audit.auditRecord(" +
+            "T(com.eb.constant.enums.AuditEnums).SYSTEM_USER_DELETE, " +
+            "#spelReturnValue, #request, #loginUser, " +
+            "#userIds)")
     @DeleteMapping("/{userIds}")
     public AjaxResult remove(
+            @SuppressWarnings("unused") HttpServletRequest request,
             @Parameter(hidden = true) @CurrLoginUser LoginUser loginUser,
             @PathVariable Long[] userIds)
     {

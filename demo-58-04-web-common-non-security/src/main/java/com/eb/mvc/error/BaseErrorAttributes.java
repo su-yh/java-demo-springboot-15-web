@@ -36,7 +36,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class BaseErrorAttributes extends DefaultErrorAttributes {
-    public static final String MESSAGE_PREFIX = "error.code";
     // i18n 国际化
     private final MessageSource messageSource;
 
@@ -73,7 +72,7 @@ public class BaseErrorAttributes extends DefaultErrorAttributes {
                 code = ErrorCodeConstants.ACCESS_DENIED;
             }
 
-            String messageSourceCode = BaseErrorAttributes.MESSAGE_PREFIX + "." + code;
+            String messageSourceCode = ErrorCodeConstants.ERROR_CODE_PREFIX + "." + code;
             Locale locale = webRequest.getLocale();
             String message = messageSource.getMessage(messageSourceCode, params, "messages.properties lost id: " + messageSourceCode, locale);
             errorAttributes.put("code", code);
