@@ -9,14 +9,14 @@ spring:
 spring:
   config:
     activate:
-      on-profile: suyh
+      on-profile: suyh,suyh_mac
 
   datasource:
     hikari:
       cds-mysql:
-        jdbc-url: jdbc:mysql://hy-yun.isuyh.com:3306/suyh-personal?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        username: suyh-personal
-        password: suyh-personal
+        jdbc-url: jdbc:mysql://isuyh.com:3306/suyh_personal?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: suyh_personal
+        password: suyh_personal
         driver-class-name: com.mysql.cj.jdbc.Driver
 #      cds-pgsql:
 #        jdbc-url: jdbc:postgresql://192.168.8.43:5432/suyh_mock_tmp?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai

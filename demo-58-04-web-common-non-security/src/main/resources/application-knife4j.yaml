@@ -92,7 +92,7 @@ springdoc:
 spring:
   config:
     activate:
-      on-profile: suyh,suyh_dev,dev
+      on-profile: suyh,suyh_dev,dev,suyh_mac
 
 knife4j:
   enable: true
