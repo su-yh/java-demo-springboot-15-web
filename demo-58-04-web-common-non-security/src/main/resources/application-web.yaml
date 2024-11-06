@@ -13,7 +13,7 @@ server:
 spring:
   config:
     activate:
-      on-profile: suyh,dev,suyh_dev
+      on-profile: suyh,dev,suyh_dev,suyh_mac
 
 server:
   error:

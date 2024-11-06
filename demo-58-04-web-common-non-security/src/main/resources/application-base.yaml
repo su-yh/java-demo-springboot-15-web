@@ -21,6 +21,22 @@ eb:
       dir: D:\tmp\cem
 
 
+---
+spring:
+  config:
+    activate:
+      on-profile: suyh_mac
+
+
+eb:
+  base:
+    token-seconds: 36000
+    captcha:
+      two-factor-auth-enabled: false
+    file-upload:
+      dir: /tmp/cem
+
+
 
 ---
 spring:

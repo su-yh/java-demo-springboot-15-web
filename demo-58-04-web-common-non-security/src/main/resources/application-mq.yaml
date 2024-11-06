@@ -4,7 +4,7 @@
 spring:
   config:
     activate:
-      on-profile: suyh,suyh_dev
+      on-profile: suyh,suyh_dev,suyh_mac
 
   rabbitmq:
     host: "hy-yun.isuyh.com"

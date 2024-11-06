@@ -7,7 +7,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: suyh
+      on-profile: suyh,suyh_mac
 
 eb:
   base:
