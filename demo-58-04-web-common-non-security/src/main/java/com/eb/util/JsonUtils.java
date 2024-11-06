@@ -22,7 +22,6 @@ public class JsonUtils {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
-        // 同步 JsonUtils 与web 中使用的jackson 一致
         JsonUtils.initMapper(OBJECT_MAPPER);
     }
 
