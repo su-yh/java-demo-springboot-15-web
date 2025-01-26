@@ -5,6 +5,7 @@ import com.eb.mvc.authentication.CurrLoginUser;
 import com.eb.mvc.authentication.LoginUser;
 import com.eb.mvc.authentication.annotation.Permit;
 import com.eb.mvc.vo.ResponseResult;
+import com.eb.rouyi.entity.SysUser;
 import com.eb.system.dto.req.UserLoginReqDto;
 import com.eb.system.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -60,5 +61,13 @@ public class UserController {
             @Parameter(hidden = true) @CurrLoginUser LoginUser loginUser) {
         String key = userService.resetTwoFactorAuthKey(loginUser.getId());
         return ResponseResult.ofSuccess(key);
+    }
+
+    @Operation(summary = "获取用户信息，这是测试使用的")
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public ResponseResult<SysUser> userInfo(@Parameter(hidden = true) @CurrLoginUser LoginUser loginUser) {
+        SysUser sysUser = loginUser.getUser();
+        sysUser.setAvatar("https://scpic.chinaz.net/files/default/imgs/2022-08-22/66bfb7924ff30786_s.jpg");
+        return ResponseResult.ofSuccess(sysUser);
     }
 }
